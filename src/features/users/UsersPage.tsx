@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { addUser, deleteUser } from "./UsersSlice";
+import Button from "../../components/ui/Button";
 
 export default function UsersPage() {
   const [name, setName] = useState("");
@@ -38,12 +39,7 @@ export default function UsersPage() {
           placeholder="Email"
           className="border p-2 rounded"
         />
-        <button
-          onClick={handleAddUser}
-          className="bg-blue-600 text-white px-4 rounded"
-        >
-          Add User
-        </button>
+        <Button onClick={handleAddUser}>Add User</Button>
       </div>
 
       <table className="w-full bg-white rounded shadow">
@@ -62,12 +58,12 @@ export default function UsersPage() {
               <td className="p-2">{user.email}</td>
               <td className="p-2">{user.role}</td>
               <td className="p-2 text-center">
-                <button
+                <Button
+                  variant="danger"
                   onClick={() => dispatch(deleteUser(user.id))}
-                  className="text-red-600 text-sm"
                 >
                   Delete
-                </button>
+                </Button>
               </td>
             </tr>
           ))}
