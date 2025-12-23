@@ -1,15 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import { addUser, deleteUser } from "./UsersSlice";
+import { addUser, fetchUsers, deleteUser } from "./UsersSlice";
 import Button from "../../components/ui/Button";
 import Table from "../../components/ui/Table";
 
 export default function UsersPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const users = useSelector((state: RootState) => state.users.list);
+  const {
+    list: users,
+    loading,
+    error,
+  } = useSelector((state: RootState) => state.users);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
+
+  if (loading) {
+    return <p>Loading users...</p>;
+  }
+
+  if (error) {
+    return <p className="text-red-600">{error}</p>;
+  }
 
   const handleAddUser = () => {
     dispatch(

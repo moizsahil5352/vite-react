@@ -1,4 +1,4 @@
-import { User } from "../features/users/usersSlice";
+import { User } from "../features/users/UsersPage";
 
 export const fetchUsersApi = (): Promise<User[]> => {
   return new Promise((resolve) => {
