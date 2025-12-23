@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { addUser, deleteUser } from "./UsersSlice";
 import Button from "../../components/ui/Button";
+import Table from "../../components/ui/Table";
 
 export default function UsersPage() {
   const [name, setName] = useState("");
@@ -42,33 +43,23 @@ export default function UsersPage() {
         <Button onClick={handleAddUser}>Add User</Button>
       </div>
 
-      <table className="w-full bg-white rounded shadow">
-        <thead className="bg-gray-200">
-          <tr>
-            <th className="p-2 text-left">Name</th>
-            <th className="p-2 text-left">Email</th>
-            <th className="p-2 text-left">Role</th>
-            <th className="p-2">Actions</th>
+      <Table headers={["Name", "Email", "Role", "Actions"]}>
+        {users.map((user) => (
+          <tr key={user.id} className="border-t">
+            <td className="p-2">{user.name}</td>
+            <td className="p-2">{user.email}</td>
+            <td className="p-2">{user.role}</td>
+            <td className="p-2">
+              <Button
+                variant="danger"
+                onClick={() => dispatch(deleteUser(user.id))}
+              >
+                Delete
+              </Button>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id} className="border-t">
-              <td className="p-2">{user.name}</td>
-              <td className="p-2">{user.email}</td>
-              <td className="p-2">{user.role}</td>
-              <td className="p-2 text-center">
-                <Button
-                  variant="danger"
-                  onClick={() => dispatch(deleteUser(user.id))}
-                >
-                  Delete
-                </Button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        ))}
+      </Table>
     </div>
   );
 }
