@@ -1,14 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { fetchUsersApi } from "../../services/api";
+import { User } from "../../types/user";
 
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-}
-
-interface UsersState {
+export interface UsersState {
   list: User[];
   loading: boolean;
   error: string | null;
@@ -20,11 +14,10 @@ const initialState: UsersState = {
   error: null,
 };
 
-export const fetchUsers = createAsyncThunk(
+export const fetchUsers = createAsyncThunk<User[]>(
   "users/fetchUsers",
   async () => {
-    const users = await fetchUsersApi();
-    return users;
+    return await fetchUsersApi();
   }
 );
 

@@ -1,31 +1,25 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../app/store";
-import { addUser, fetchUsers, deleteUser } from "./UsersSlice";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { fetchUsers, addUser, deleteUser } from "./usersSlice";
 import Button from "../../components/ui/Button";
 import Table from "../../components/ui/Table";
 
 export default function UsersPage() {
+  const dispatch = useAppDispatch();
+
+  const { list: users, loading, error } = useAppSelector(
+    (state) => state.users
+  );
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const {
-    list: users,
-    loading,
-    error,
-  } = useSelector((state: RootState) => state.users);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
-  if (loading) {
-    return <p>Loading users...</p>;
-  }
-
-  if (error) {
-    return <p className="text-red-600">{error}</p>;
-  }
+  if (loading) return <p>Loading users...</p>;
+  if (error) return <p className="text-red-600">{error}</p>;
 
   const handleAddUser = () => {
     dispatch(
@@ -43,6 +37,7 @@ export default function UsersPage() {
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-4">Users</h2>
+
       <div className="mb-4 flex gap-2">
         <input
           value={name}

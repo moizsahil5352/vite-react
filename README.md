@@ -1,21 +1,55 @@
-# React + TypeScript + Vite
+# React Vite Admin Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, scalable admin dashboard built with **React 18**, **Vite 5**, **TypeScript**, and **Redux Toolkit**.  
+This project demonstrates **production-style frontend architecture**, clean state management, and reusable UI patterns.
 
-While this project uses React, Vite supports many popular JS frameworks. [See all the supported frameworks](https://vitejs.dev/guide/#scaffolding-your-first-vite-project).
+---
 
-## Deploy Your Own
+## ✨ Features
 
-Deploy your own Vite project with Vercel.
+- Mock authentication with protected routes
+- Users management (CRUD – mock API)
+- Async data fetching with loading & error states
+- Feature-based project structure
+- Reusable UI components (Button, Card, Table)
+- Responsive layout with Tailwind CSS
+- Clean Git history with incremental commits
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/examples/tree/main/framework-boilerplates/vite-react&template=vite-react)
+---
 
-_Live Example: https://vite-react-example.vercel.app_
+## 🧠 Architectural Decisions
 
-### Deploying From Your Terminal
+### Why Vite?
+- Faster dev server and build times than CRA
+- Modern ecosystem alignment
+- Preferred by many frontend teams today
 
-You can deploy your new Vite project with a single command from your terminal using [Vercel CLI](https://vercel.com/download):
+### Why Redux Toolkit?
+- Predictable global state management
+- Simplifies reducers and async flows
+- Easy to scale as application grows
 
-```shell
-$ vercel
-```
+### Why Feature-Based Structure?
+- Improves scalability
+- Encourages ownership per domain
+- Reduces cross-feature coupling
+
+### Why Mock APIs?
+- Keeps frontend focused
+- Demonstrates real async patterns (`createAsyncThunk`)
+- Easy swap with real backend later
+
+---
+
+## 📁 Project Structure
+
+```bash
+src/
+├── app/              # Store & routing
+├── components/       # Reusable UI & shared components
+├── features/         # Feature modules (auth, users, dashboard)
+├── layouts/          # App layouts
+├── services/         # API layer (mocked)
+├── hooks/            # Custom hooks
+├── types/            # Shared TypeScript types
+└── utils/            # Utility functions

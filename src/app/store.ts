@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "../features/auth/authSlice";
-import usersReducer from "../features/users/UsersPage";
+import usersReducer from "../features/users/usersSlice"; // ✅ NOT UsersPage
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    users: usersReducer,
+    users: usersReducer, // ✅ MUST be reducer
   },
 });
 

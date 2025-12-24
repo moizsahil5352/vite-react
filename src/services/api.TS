@@ -1,4 +1,4 @@
-import { User } from "../features/users/UsersPage";
+import { User } from "../types/user";
 
 export const fetchUsersApi = (): Promise<User[]> => {
   return new Promise((resolve) => {
